@@ -12,7 +12,7 @@ class VeiculoController extends Controller
      */
     public function index()
     {
-        //
+        return view('pages.veiculo',['veiculo'=>Veiculo::orderBy('matricula','ASC')->get()]);
     }
 
     /**
@@ -28,15 +28,31 @@ class VeiculoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $valor=null;
+        if(isset($request->id)){
+            $valor= Veiculo::find($request->id);
+        }else{
+
+            $valor= new Veiculo();
+        }
+        $valor->matricula=$request->matricula;
+        $valor->tipo=$request->tipo;
+        $valor->cilindrada=$request->cilindrada;
+        $valor->peso=$request->peso;
+        $valor->lotacao=$request->lotacao;
+        $valor->numero_chaci=$request->numero_chaci;
+        $valor->motorista_id=$request->motorista_id;
+        $valor->save();
+        return redirect()->back()->with("Sucesso","Veiculo CADASTRADO");
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Veiculo $veiculo)
+    public function show( $veiculo)
     {
-        //
+        Veiculo::find($veiculo)->delete();
+        return redirect()->back()->with("Sucesso","Veiculo Eliminado");
     }
 
     /**

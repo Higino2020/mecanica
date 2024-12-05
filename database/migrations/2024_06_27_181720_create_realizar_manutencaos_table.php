@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('realizar_manutencaos', function (Blueprint $table) {
             $table->id();
             $table->string('estado');
-            $table->foreignId('mautencao_id')->constrained('mautencaos')->onDelete('cascade');
+            $table->foreignId('manutencao_id')->constrained('manutencaos')->onDelete('cascade');
             $table->foreignId('veiculo_id')->constrained('veiculos')->onDelete('cascade');
             $table->foreignId('funcionario_id')->constrained('funcionarios')->onDelete('cascade');
             $table->timestamps();

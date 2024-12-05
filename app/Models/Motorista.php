@@ -8,4 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Motorista extends Model
 {
     use HasFactory;
+    public function motorista(){
+        return $this->hasMany(Motorista::class);
+    }
 }

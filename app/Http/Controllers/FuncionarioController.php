@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Funcionario;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class FuncionarioController extends Controller
@@ -12,7 +13,7 @@ class FuncionarioController extends Controller
      */
     public function index()
     {
-        //
+        return view('pages.funcionario',['funcionario'=>Funcionario::orderBy('nomeCompleto','ASC')->get()]);
     }
 
     /**
@@ -28,15 +29,35 @@ class FuncionarioController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $valor=null;
+        if(isset($request->id)){
+            $valor= Funcionario::find($request->id);
+        }else{
+
+            $valor= new Funcionario();
+            if($request->cargo == "Atendente"){
+                $user  = User::cadastrar($request);
+                $valor->user_id=$user->id;
+            }
+        }
+        $valor->nomeCompleto=$request->nomeCompleto;
+        $valor->cargo=$request->cargo;
+        $valor->genero=$request->genero;
+        $valor->telefone=$request->telefone;
+        $valor->email=$request->email;
+        $valor->data_nascimento=$request->data_nascimento;
+        $valor->save();
+        return redirect()->back()->with("Sucesso","FUNCIONARIO CADASTRADO");
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Funcionario $funcionario)
+    public function show($funcionario)
     {
-        //
+        $funcionario = Funcionario::find($funcionario)->delete();;
+        return redirect()->back()->with("Sucesso","FUNCIONARIO CADASTRADO");
+
     }
 
     /**

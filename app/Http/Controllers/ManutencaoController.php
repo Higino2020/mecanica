@@ -12,7 +12,7 @@ class ManutencaoController extends Controller
      */
     public function index()
     {
-        //
+        return view('pages.manutencoes',['manutencao'=>Manutencao::all()]);
     }
 
     /**
@@ -28,15 +28,26 @@ class ManutencaoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $manu = null;
+        if(isset($request->id)){
+            $manu = Manutencao::find($request->id);
+        }else{
+            $manu = new Manutencao();
+        }
+        $manu->tipo = $request->tipo;
+        $manu->preco = $request->preco;
+        $manu->descricao = $request->descricao;
+        $manu->save();
+        return redirect()->back()->with('Sucesso','Tipo de Manutenção cadastrada com exito');
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Manutencao $manutencao)
+    public function show($id)
     {
-        //
+        Manutencao::find($id)->delete();
+        return redirect()->back()->with('Sucesso','Tipo de Manutenção Eliminada com exito');
     }
 
     /**

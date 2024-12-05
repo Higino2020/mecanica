@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+<!-- login23:11-->
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
+    <link rel="shortcut icon" type="image/x-icon" href="{{asset('img/logoc2.png')}}">
+    <title>CSR - CENTER | Login</title>
+    <link rel="stylesheet" type="text/css" href="{{asset('css/bootstrap.min.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{asset('css/font-awesome.min.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{asset('css/style.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{asset('css/login.css')}}">
+    <!--[if lt IE 9]>
+		<script src="assets/js/html5shiv.min.js"></script>
+		<script src="assets/js/respond.min.js"></script>
+	<![endif]-->
+</head>
+
+<body>
+    <div class="main-wrapper account-wrapper" id="bg-login">
+        <div class="account-page">
+			<div class="account-center">
+				<div class="account-box">
+                    <form action="{{route('login')}}" method="POST" class="form-signin">
+                        @csrf
+						<div class="account-logo">
+                            <img src="{{asset('img/logoc.jpg')}}" alt="">
+                            <h4 class="mt-2">CSR - Center</h4>
+                        </div>
+                        <div class="form-group">
+                            <label>Nome do Usuario ou Email</label>
+                            <input type="text" autofocus="" name="email" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label>Senha</label>
+                            <input type="password" name="password" class="form-control">
+                        </div>
+                        <div class="form-group text-center">
+                            <button type="submit" class="btn btn-primary account-btn">Entrar</button>
+                        </div>
+                    </form>
+                </div>
+			</div>
+        </div>
+    </div>
+    <script src="{{asset('js/jquery-3.2.1.min.js')}}"></script>
+	<script src="{{asset('js/popper.min.js')}}"></script>
+    <script src="{{asset('js/bootstrap.min.js')}}"></script>
+    <script src="{{asset('js/app.js')}}"></script>
+</body>
+
+
+<!-- login23:12-->
+</html>

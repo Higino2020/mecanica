@@ -12,7 +12,7 @@ class MotoristaController extends Controller
      */
     public function index()
     {
-        //
+      return view('pages.motorista',['motorista'=>Motorista::orderBy('nomeCompleto','ASC')->get()]);
     }
 
     /**
@@ -28,15 +28,29 @@ class MotoristaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $valor=null;
+        if(isset($request->id)){
+            $valor= Motorista::find($request->id);
+        }else{
+
+            $valor= new Motorista();
+        }
+        $valor->nomeCompleto=$request->nomeCompleto;
+        $valor->genero=$request->genero;
+        $valor->telefone=$request->telefone;
+        $valor->email=$request->email;
+        $valor->save();
+        return redirect()->back()->with("Sucesso","Motorista CADASTRADO");
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Motorista $motorista)
+    public function show($id)
     {
-        //
+        Motorista::find($id)->delete();
+        return redirect()->back()->with("Sucesso","Motorista Eliminado");
+
     }
 
     /**

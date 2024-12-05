@@ -5,6 +5,7 @@ namespace App\Models;
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Http\Request;
 use Illuminate\Notifications\Notifiable;
 
 class User extends Authenticatable
@@ -20,6 +21,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'tipo'
     ];
 
     /**
@@ -43,5 +45,19 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+
+    public static function cadastrar(Request $request){
+        $nomes = explode(' ',$request->name);
+        $user = new User();
+        $user->name = $request->nomeCompleto;
+        $user->email = $request->email;
+        $user->tipo = "Funcionario";
+        $user->password = bcrypt("csr2024");
+        $user->save();
+        return $user;
+    }
+    public function funcionario(){
+        return $this->hasOne(Funcionario::class,'user_id');
     }
 }
